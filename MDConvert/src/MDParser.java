@@ -9,9 +9,11 @@ public class MDParser {
 
 	MDParser(String InputFileName)
 	{
+		 fileContents = new ArrayList<String>();
 		 try{
 	          BufferedReader in = new BufferedReader(new FileReader(InputFileName));
-	          String s;
+	          String s = null;
+	          //String temp = null;
 	          while((s = in.readLine()) != null){
 	             fileContents.add(s);
 	          }

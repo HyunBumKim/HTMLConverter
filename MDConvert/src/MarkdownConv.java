@@ -14,7 +14,7 @@ public static void main(String[] args) {
 	
 	MDParser parser = new MDParser(InputFileName);
 	
-	
+	System.out.println(parser.fileContents.get(0));
 	
  }
 }
