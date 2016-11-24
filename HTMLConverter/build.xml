@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<project name="HTMLConverter" default="javadoc" basedir="." >
+
+<description>
+ 	A build file for this project
+</description>
+
+<!-- properties for this build file-->
+<property name="src.dir" value="${basedir}/src" />
+<property name="class.dir" value="${basedir}/class" />
+<property name="lib.dir" value="${basedir}/lib"/>
+<property name="jar.dir" value="${basedir}/jar" />
+<property name="javadoc.dir" value="${basedir}/doc" />
+
+<!--initializes some directories for this project-->
+<target name="init">
+<mkdir dir="${class.dir}"/>
+<mkdir dir="${lib.dir}"/>
+<mkdir dir="${jar.dir}"/>
+<mkdir dir="${javadoc.dir}"/>
+</target>
+
+<!--compiles the source code -->
+<target name="compile" depends= "init" >
+	<javac srcdir="${src.dir}" destdir="${class.dir}" />
+</target>
+
+<!--make the manifest-->
+<target name="create-manifest" depends = "init">
+<manifest file = "${class.dir}/MANTIFEST.MF">
+<attribute name = "Built-By" value = "${user.name}"/>
+<attribute name = "Built-On" value = "${timestamp.isoformat}"/>
+<attribute name = "Main-Class" value = "org.example.antbook.Search"/>
+</manifest>
+</target>
+
+<!--creates the JAR file-->
+<target name="jar" depends="compile">
+<jar jarfile="${jar.dir}/MarkdownConv.jar"
+	    basedir="${class.dir}"
+              includes="**/*.java"
+	    manifest = "${class.dir}/MANTIFEST.MF"
+/>
+</target>
+
+
+
+<!-- generates javadocs  -->
+<target name="javadoc" depends="compile, jar" >
+<javadoc
+sourcepath="${src.dir}"
+sourcefiles="${src.dir}/MarkdownConv.java"
+windowtitle="HelloAnt API"
+destdir="${javadoc.dir}"
+/>
+</target>
+
+<!-- runs the program-->
+<target name="run" depends="compile">
+        <java jar="jar/MarkdownConv.jar" fork="true" />
+</target>
+
+<!-- removes the temporary directiories used-->
+<target name="clean"  depends ="init">
+	<delete dir="${class.dir}/class/*"/>
+	<delete dir="${lib.dir}/lib/*"/>
+	<delete dir="${jar.dir}/jar/*"/>
+<delete dir="${javadoc.dir}/doc/*"/>
+<delete>
+	<fileset defaultexcludes= "no" dir="${src.dir}" includes="**/*~"/>
+</delete>
+</target>
+
+</project>
