@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Converter" default="javadoc" basedir="d:\ant" >
+<property name="src.dir" value="${basedir}/src" />
+<property name="class.dir" value="${basedir}/class" />
+<property name="jar.dir" value="${basedir}/jar" />
+<property name="javadoc.dir" value="${basedir}/doc" />
+
+<target name="compile" >
+<javac srcdir="${src.dir}" destdir="${class.dir}" />
+</target>
+
+<target name="xml" depends="compile">
+<jar jarfile="${basedir}/build.xml"
+basedir="${class.dir}"
+includes="**/*.class"
+/>
+</target>
+
+<target name="jar" depends="compile">
+<jar jarfile="${jar.dir}/MarkdownConv.jar"
+basedir="${class.dir}"
+includes="**/*.class"
+/>
+</target>
+
+<target name="javadoc" depends="compile, jar" >
+<javadoc
+sourcepath="${src.dir}"
+sourcefiles="${src.dir}/MarkdownConv.java"
+windowtitle="HelloAnt API"
+destdir="${javadoc.dir}"
+/>
+</target>
+
+<target name="run">
+        <java jar="jar/MarkdownConv.jar" fork="true" />
+</target>
+
+<target name="clean" >
+<delete dir="${class.dir}/class/*"/>
+<delete dir="${jar.dir}/jar/*"/>
+<delete dir="${javadoc.dir}/doc/*"/>
+</target>
+
+
+
+</project>
