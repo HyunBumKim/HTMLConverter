@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<project name="HTMLConverter" default="javadoc" basedir="." >
+
+<!-- properties for this build file-->
+<property name="src.dir" value="${basedir}/src" />
+<property name="class.dir" value="${basedir}/build/classes" />
+<property name="javadoc.dir" value="${basedir}/doc" />
+<property name="dist.dir" value="${basedir}/dist" />
+
+<!--initializes some directories for this project-->
+<target name="init">
+  <mkdir dir="${src.dir}"/>
+  <mkdir dir="${class.dir}"/>
+  <mkdir dir="${javadoc.dir}"/>
+  <mkdir dir="${dist.dir}"/>
+</target>
+
+<!--compiles the source code -->
+<target name="compile" depends= "init" >
+<javac srcdir="${src.dir}" destdir="${class.dir}" />
+</target>
+
+<property name="main.class" value="MarkdownConv" />
+ 
+<!--creates a manifest-->
+<target name="create_manifest" depends= "compile">
+<manifest file = "${src.dir}/MANIFEST.MF">
+<attribute name = "Built-By" value = "${user.name}"/>
+<attribute name = "Main-Class" value = "${main.class}"/>
+</manifest>
+</target>
+
+<!--creates the JAR file-->
+<target name="jar" depends="create_manifest">
+<jar jarfile="${dist.dir}/MarkdownConv.jar"
+basedir="${class.dir}"
+includes = "**/*.class"
+manifest = "${src.dir}/MANIFEST.MF"/>
+</target>
+
+<!-- generates javadocs  -->
+<target name="javadoc" depends="compile, jar" >
+<javadoc
+sourcepath="${src.dir}"
+sourcefiles="${src.dir}/MarkdownConv.java"
+windowtitle="HelloAnt API"
+destdir="${javadoc.dir}"
+/>
+</target>
+
+<!-- removes the temporary directiories used-->
+<target name="clean" depends="init" >
+<delete dir="${class.dir}"/>
+<delete dir="${dist.dir}"/>
+<delete dir="${javadoc.dir}"/>
+
+<delete>
+<fileset defaultexcludes= "no" dir="${src.dir}" includes="**/*~"/>
+</delete>
+</target>
+
+<target name="run" depends = "compile">
+        <java jar="dist/MarkdownConv.jar" 
+        fork="true"
+        failonerror = "true"
+        >
+</java>
+</target>
+</project>
