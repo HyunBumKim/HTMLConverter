@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Converter" default="javadoc" basedir="." >
+
+<description>
+    A build file for this project
+</description>
+
+<!-- properties for this build file-->
+<property name="src.dir" value="${basedir}/src" />
+<property name="class.dir" value="${basedir}/class" />
+<property name="lib.dir" value="${basedir}/lib"/>
+<property name="jar.dir" value="${basedir}/jar" />
+<property name="javadoc.dir" value="${basedir}/doc" />
+<property name="main.class" value="MarkdownConv"/>
+
+<!--setup the directiory to include Jtidy JAR in ${lib.dir}-->
+
+<path id="build-classpath">
+	<fileset dir="${lib.dir}" includes="**/*.jar" />
+</path>
+
+<!--initializes some directories for this project-->
+<target name="init" description = "setup directories">
+ 	<mkdir dir="${class.dir}"/>
+          <mkdir dir="${jar.dir}"/>
+ 	<mkdir dir="${javadoc.dir}"/>
+</target>
+
+<!-- removes the temporary directiories used and Emacs backup (*~) files-->
+<target name="clean" depends="init" description ="clean the workspace" >
+	<delete dir="${class.dir}"/>
+	<delete dir="${javadoc.dir}"/>
+
+   <delete>
+         <fileset defaultexcludes= "no" dir="${src.dir}" includes="**/*~"/>
+   </delete>
+</target>
+
+<!--compiles the source code in ${src.dir} into ${class.dir}-->
+<target name="compile" depends= "init" description = "compile java sources" >
+        <javac srcdir="${src.dir}" destdir="${class.dir}" classpathref="build-classpath">
+        </javac>
+</target>
+
+<!--creates a manifest-->
+<target name="create_manifest" depends= "compile">
+	<manifest file = "${src.dir}/MANIFEST.MF">
+	<attribute name = "Built-By" value = "${user.name}"/>
+	<attribute name = "Main-Class" value = "${main.class}"/>
+          <attribute name = "Class-Path" value = "${jar.classpath}"/>
+</manifest>
+</target>
+
+<!--creates the JAR file into ${jar.dir}-->
+<target name="jar" depends="create_manifest">
+      <manifestclasspath property="jar.classpath" jarfile="${lib.dir}/jtidy-r938.jar">
+          <classpath refid="build-classpath"/>
+        </manifestclasspath>
+<jar jarfile="${jar.dir}/MarkdownConv.jar" 
+           basedir="${class.dir}" 
+           includes="**/*.class"
+           manifest = "${src.dir}/MANIFEST.MF"
+	 />
+</target>
+
+<!-- generates javadocs into ${javadoc.dir}-->
+<target name="javadoc" depends="compile, jar" description = "generate doc">
+	<javadoc
+	      sourcepath="${src.dir}"
+	      sourcefiles="${src.dir}/MarkdownConv.java"
+	      windowtitle="HelloAnt API"
+	      destdir="${javadoc.dir}"
+	      classpathref="build-classpath"
+	/>
+</target>
+
+<!-- runs the program using the JAR file-->
+<target name="run" depends="compile" description = "running the program">
+        <java jar="jar/MarkdownConv.jar" fork="true"/>
+</target>
+</project>
