@@ -46,7 +46,6 @@ public class CommandLineInterface {
 	             default:System.err.println("WRONG INPUT : ERROR");
 	          }
 	       }
-	       
 	    }
 	}
 	

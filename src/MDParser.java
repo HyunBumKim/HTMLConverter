@@ -5,88 +5,68 @@ import java.util.ArrayList;
 import java.util.StringTokenizer; 
 
 public class MDParser {
-   
-   ArrayList<String> fileContents;
-   public String Parser(String st)
-   {
-      int i=0;
-      if(st.indexOf("**")!=-1) {}
-    	  
-      return st;
-   }
-   
-   public String FirstTextParser(String st)
-   {
-      String[] st1 = {}; 
-      //stë¥¼ ì €ì¥í•  arrayê°€ í•„ìš” ê·¸ë˜ì„œ ì„ì˜ë¡œ st1 array ìƒì„±
-      for(int i=0;i<st.length();i++){
-    	  st1[i] = st;
-      }
-      StringTokenizer st2 = new StringTokenizer(st, ".");
-      if(st1[0]==">")
-      {
-         //st.substring(1)
-         //st[1]ë¶€í„° plain string tokenìœ¼ë¡œ ë³´ë‚¸ë‹¤
-      }
-      else if((st1[0]=="*" || st1[0]=="+" || st1[0]=="-") && (st1[1]==" " || st1[1]=="\t"))
-      {
-         //st.substring(2);
-         //st[2]ë¶€í„° token parserìœ¼ë¡œ ë³´ë‚¸ë‹¤
-      }
-      else if(isStringNum(st2.nextToken()))
-      {
-         //st1.nextToken;
-         //st1.nextTokenì„ token parserìœ¼ë¡œ ë³´ë‚¸ë‹¤
-      }
-      else if(st1[0]=="-" && st.replaceAll("-", "").length()==0)
-      {
-         //í•´ë‹¹ string ì¤„ ìœ„ì˜ ë¼ì¸ì„ ì œëª©ìœ¼ë¡œ ë§Œë“ ë‹¤
-      }
-      else if(st1[0]=="=" && st.replaceAll("=", "").length()==0)
-      {
-         //í•´ë‹¹ string ì¤„ ìœ„ì˜ ë¼ì¸ì„ ì œëª©ìœ¼ë¡œ ë§Œë“ ë‹¤
-      }
-      else if((st.replaceAll(" ", "").indexOf("***")==0) && st.replaceAll("*", "").length()==0)
-      {
-         //í•´ë‹¹ lineì˜ ë¬¸ìë¥¼ ì „ë¶€ ì‚­ì œ í›„ horizontal line ì‚½ì…
-      }
-      else if((st.replaceAll(" ", "").indexOf("---")==0) && st.replaceAll("-", "").length()==0)
-      {
-         //í•´ë‹¹ lineì˜ ë¬¸ìë¥¼ ì „ë¶€ ì‚­ì œ í›„ horizontal line ì‚½ì…
-      }
-	return st;
-      
-      /*
-       * ìœ—ì¤„ì´ listí˜•íƒœë¼ë©´ í•´ë‹¹ ì¤„ë„ list í˜•ì‹ì„ ëˆë‹¤
-       * ì´ ê²½ìš° ì œëª© í˜•ì‹ì€ ì˜ë¯¸ê°€ ì—†ë‹¤
-       * */
-   }
+	
+	ArrayList<String> fileContents;
+	public String Parser(String st){
+		int i=0;
+		if(st.indexOf("**")!=-1)
+		
+		
+	}
+	
+	public String FirstTextParser(String st){
+		
+		StringTokenizer st1 = new StringTokenizer(st, ".");
+		if(st[0]=='>'){
+			//st.substring(1)
+			//st[1]ºÎÅÍ plain string tokenÀ¸·Î º¸³½´Ù
+		}
+		else if((st[0]=="*" || st[0]=="+" || st[0]=="-") && (st[1]==" " || st[1]=="\t")){
+			//st.substring(2);
+			//st[2]ºÎÅÍ token parserÀ¸·Î º¸³½´Ù
+		}
+		else if(isStringNum(st1.nextToken())){
+			//st1.nextToken;
+			//st1.nextTokenÀ» token parserÀ¸·Î º¸³½´Ù
+		}
+		else if(st[0]=="-" && st.replaceAll("-", "").length()==0){
+			//ÇØ´ç string ÁÙ À§ÀÇ ¶óÀÎÀ» Á¦¸ñÀ¸·Î ¸¸µç´Ù
+		}
+		else if(st[0]=="=" && st.replaceAll("=", "").length==0){
+			//ÇØ´ç string ÁÙ À§ÀÇ ¶óÀÎÀ» Á¦¸ñÀ¸·Î ¸¸µç´Ù
+		}
+		else if((st.replaceAll(" ", "").indexOf("***")==0) && st.replaceAll("*", "").length()==0){
+			//ÇØ´ç lineÀÇ ¹®ÀÚ¸¦ ÀüºÎ »èÁ¦ ÈÄ horizontal line »ğÀÔ
+		}
+		else if((st.replaceAll(" ", "").indexOf("---")==0) && st.replaceAll("-", "").length()==0){
+			//ÇØ´ç lineÀÇ ¹®ÀÚ¸¦ ÀüºÎ »èÁ¦ ÈÄ horizontal line »ğÀÔ
+		}
+		
+		/*
+		 * À­ÁÙÀÌ listÇüÅÂ¶ó¸é ÇØ´ç ÁÙµµ list Çü½ÄÀ» ¶è´Ù
+		 * ÀÌ °æ¿ì Á¦¸ñ Çü½ÄÀº ÀÇ¹Ì°¡ ¾ø´Ù
+		 * */
+	}
 
-   private boolean isStringNum(String nextToken) {
-	// TODO Auto-generated method stub
-	return false;
-}
-
-MDParser(String InputFileName)
-   {
-       fileContents = new ArrayList<String>();
-       try{
-             BufferedReader in = new BufferedReader(new FileReader(InputFileName));
-             String s = null;
-             //String temp = null;
-             while((s = in.readLine()) != null)
-             {
-                fileContents.add(s);
-             }
-             in.close();
-          }
-          catch(IOException e)
-          {
-             System.err.println(e);
-             System.exit(1);
-          }
-       /////////////////read done//////////////////   
-   }
-   
-   
+	MDParser(String InputFileName)
+	{
+		 fileContents = new ArrayList<String>();
+		 try{
+	          BufferedReader in = new BufferedReader(new FileReader(InputFileName));
+	          String s = null;
+	          //String temp = null;
+	          while((s = in.readline()) != null){
+	             fileContents.add(s);
+	          }
+	          in.close();
+	       }
+	       catch(IOException e){
+	          System.err.println(e);
+	          System.exit(1);
+	       }
+		 /////////////////read done//////////////////
+		 
+	}
+	
+	
 }
