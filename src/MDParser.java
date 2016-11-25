@@ -2,118 +2,137 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.StringTokenizer; 
+import java.util.StringTokenizer;
+
 
 public class MDParser {
-   
-   ArrayList<String> fileContents;
-   public String Parser(String st)
-   {
-      int i=0, start=0, end=0;
-      
-      //stï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ arrayï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç·ï¿½ st1 array ï¿½ï¿½ï¿½ï¿½
-      if((start = st.indexOf("***"))!=-1 || (start = st.indexOf("___"))!=-1){
-          if((end=st.substring(start+3, st.length()).indexOf("***"))!=-1){
-        	  //substring ï¿½Ì¿ï¿½ï¿½ï¿½ start+3~end-1ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-          }
-          if((end = st.substring(start+3, st.length()).indexOf("___"))!=-1){
-        	  
-          }
-      }
-      else if((start = st.indexOf("**"))!=-1 || (start = st.indexOf("__"))!=-1) {
-    	  if((end=st.substring(start+2, st.length()).indexOf("**"))!=-1){
-        	  //substring ï¿½Ì¿ï¿½ï¿½ï¿½ start+2~end-1ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-          }
-    	  if((end = st.substring(start+2, st.length()).indexOf("__"))!=-1){
-        	  
-          }
-      }
-      else if((start = st.indexOf("*"))!=-1 || (start = st.indexOf("_"))!=-1){
-    	  if((end=st.substring(start+1, st.length()).indexOf("*"))!=-1){
-        	  //substring ï¿½Ì¿ï¿½ï¿½ï¿½ start+1~end-1ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-          }
-    	  if((end = st.substring(start+1, st.length()).indexOf("_"))!=-1){
-        	  
-          }
-      }else{
-    	  //ï¿½ï¿½Ã¼ string ï¿½ï¿½ï¿½ï¿½
-      }
-         
-      return st;
-   }
-   
-   public String FirstTextParser(String st)
-   {
-      String[] st1 = {}; 
-      //stï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ arrayï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç·ï¿½ st1 array ï¿½ï¿½ï¿½ï¿½
-      for(int i=0;i<st.length();i++){
-         st1[i] = st;
-      }
-      StringTokenizer st2 = new StringTokenizer(st, ".");
-      if(st1[0]==">")
-      {
-         //st.substring(1)
-         //st[1]ï¿½ï¿½ï¿½ï¿½ plain string tokenï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-      }
-      else if((st1[0]=="*" || st1[0]=="+" || st1[0]=="-") && (st1[1]==" " || st1[1]=="\t"))
-      {
-         //st.substring(2);
-         //st[2]ï¿½ï¿½ï¿½ï¿½ token parserï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-      }
-      else if(isStringNum(st2.nextToken()))
-      {
-         //st1.nextToken;
-         //st1.nextTokenï¿½ï¿½ token parserï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-      }
-      else if(st1[0]=="-" && st.replaceAll("-", "").length()==0)
-      {
-         //ï¿½Ø´ï¿½ string ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
-      }
-      else if(st1[0]=="=" && st.replaceAll("=", "").length()==0)
-      {
-         //ï¿½Ø´ï¿½ string ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
-      }
-      else if((st.replaceAll(" ", "").indexOf("***")==0) && st.replaceAll("*", "").length()==0)
-      {
-         //ï¿½Ø´ï¿½ lineï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ horizontal line ï¿½ï¿½ï¿½ï¿½
-      }
-      else if((st.replaceAll(" ", "").indexOf("---")==0) && st.replaceAll("-", "").length()==0)
-      {
-         //ï¿½Ø´ï¿½ lineï¿½ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ horizontal line ï¿½ï¿½ï¿½ï¿½
-      }
-   return st;
-      
-      /*
-       * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ listï¿½ï¿½ï¿½Â¶ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½Ùµï¿½ list ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
-       * ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¹Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½
-       * */
-   }
+	
+	Document document;
+	ArrayList<String> fileContents;
+	String fileString;
 
-   private boolean isStringNum(String nextToken) {
-   // TODO Auto-generated method stub
-   return false;
-}
+	MDParser(String InputFileName)
+	{
+		 
+		 fileContents = new ArrayList<String>();
+		 fileString = new String();
+		 
+		 
+		 try{
+	          BufferedReader in = new BufferedReader(new FileReader(InputFileName));
+	          String s;
+	        
+	          while((s = in.readLine()) != null){
+	             fileContents.add(s);
+	             fileString += (s +"\n");
+	          }
+	        
+	          in.close();
+	          
+	          document = new Document(fileContents);
+	          FirstTextParser(fileContents);
+	        
+	          
+	       }
+	       catch(IOException e){
+	          System.err.println(e);
+	          System.exit(1);
+	       }
+		 catch(NullPointerException e)
+		 {
+			 System.out.println(e);
+			 System.out.println("java [program name] -md/[InputFile] -html/[OutputFile] -style/[style]");
+		 }
+		}
+	
+	public String Parser(String st)
+	   {
+	      int i=0;
+	      if(st.indexOf("**")!=-1) {}
+	         
+	      return st;
+	   }
 
-MDParser(String InputFileName)
-   {
-       fileContents = new ArrayList<String>();
-       try{
-             BufferedReader in = new BufferedReader(new FileReader(InputFileName));
-             String s = null;
-             //String temp = null;
-             while((s = in.readLine()) != null)
-             {
-                fileContents.add(s);
-             }
-             in.close();
-          }
-          catch(IOException e)
-          {
-             System.err.println(e);
-             System.exit(1);
-          }
-       /////////////////read done//////////////////   
-   }
-   
-   
+	   
+	   public void FirstTextParser(ArrayList<String> fileContents2)
+	   {
+		   
+		//  String buff;
+	      String[] st1; 
+	      
+	      String line = fileContents2.get(0);
+	      String downline = fileContents2.get(1);
+	      
+	      line = line.trim();
+	      downline=downline.trim();
+	    
+	      st1 = line.split("");
+	      
+	      //header
+	      if(downline.contains("===") || downline.contains("---"))//header¿Í horizontal ±¸ºÐÇÏµµ·Ï ÇØ¾ßÇÔ
+	      {
+	    	  Header header = new Header(line);
+	    	  header.level =0; //this header doesn't have header level. 
+	    	  this.document.elements.add(header);
+	    	  return;
+	      }
+	      
+	      StringTokenizer st2 = new StringTokenizer(line, ".");// for checking order list
+	      
+	      if(st1[0]==">")
+	      {
+	    	 //quotedBlock node»ý¼º 
+	         //st.substring(1)
+	         //st[1]ºÎÅÍ plain string tokenÀ¸·Î º¸³½´Ù
+	      }
+	      else if(st1[0] == "#")
+	      {
+	    	  //check that string 'line' is header node
+	    	  HeaderChecker headerchecker = new HeaderChecker(line);
+	    	  Header header = new Header(headerchecker.text);
+	    	  header.level = headerchecker.headerLevel;
+	    	  document.elements.add(header);
+	    	 
+	      }
+	      else if((st1[0]=="*" || st1[0]=="+" || st1[0]=="-") && (st1[1]==" " || st1[1]=="\t"))
+	      {
+	         //st.substring(2);
+	         //st[2]ºÎÅÍ list node parserÀ¸·Î º¸³½´Ù
+	      }
+	      else if(isStringNum(st2.nextToken()))
+	      {
+	         //st1.nextToken;
+	         //st1.nextTokenÀ» order list parserÀ¸·Î º¸³½´Ù
+	      }
+	      else if(st1[0]=="-" && line.replaceAll("-", "").length()==0)
+	      {
+	         //ÇØ´ç string ÁÙ À§ÀÇ ¶óÀÎÀ» Á¦¸ñÀ¸·Î ¸¸µç´Ù
+	      }
+	      else if(st1[0]=="=" && line.replaceAll("=", "").length()==0)
+	      {
+	         //ÇØ´ç string ÁÙ À§ÀÇ ¶óÀÎÀ» Á¦¸ñÀ¸·Î ¸¸µç´Ù
+	      }
+	      else if((line.replaceAll(" ", "").indexOf("***")==0) && line.replaceAll("*", "").length()==0)
+	      {
+	         //ÇØ´ç lineÀÇ ¹®ÀÚ¸¦ ÀüºÎ »èÁ¦ ÈÄ horizontal line »ðÀÔ
+	      }
+	      else if((line.replaceAll(" ", "").indexOf("---")==0) && line.replaceAll("-", "").length()==0)
+	      {
+	         //ÇØ´ç lineÀÇ ¹®ÀÚ¸¦ ÀüºÎ »èÁ¦ ÈÄ horizontal line »ðÀÔ
+	      }
+	   //return st;
+	      
+	      /*
+	       * À­ÁÙÀÌ listÇüÅÂ¶ó¸é ÇØ´ç ÁÙµµ list Çü½ÄÀ» ¶è´Ù
+	       * ÀÌ °æ¿ì Á¦¸ñ Çü½ÄÀº ÀÇ¹Ì°¡ ¾ø´Ù
+	       * */
+	   }
+
+	   private boolean isStringNum(String nextToken) {
+	   // TODO Auto-generated method stub
+	   return false;
+	}
+
+
+	
 }

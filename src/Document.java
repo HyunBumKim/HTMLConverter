@@ -2,11 +2,12 @@ import java.util.ArrayList;
 
 public class Document implements MDElement {
 	ArrayList<MDElement> elements;
-	private ArrayList<String> fileContents;
+	ArrayList<String> fileContents;
 	
 	Document(ArrayList<String> fileContents)
 	{
-		this.fileContents = fileContents;
+		this.fileContents = (ArrayList<String>) fileContents.clone();
+		this.elements = new ArrayList<MDElement>();
 	}
 	
 	public void updateElements()
