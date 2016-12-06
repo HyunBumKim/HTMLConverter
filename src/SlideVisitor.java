@@ -24,4 +24,9 @@ public class SlideVisitor implements MDElementVisitor{
 	public void visit(Token token) {
 		
 	}
+	@Override
+	public void visit(QuotedBlock quotedBlock) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -1,7 +1,8 @@
+import java.util.ArrayList;
 
 public class StyleText extends Token{
 
-	public StyleText(String text) {
+	public StyleText(ArrayList<String> text) {
 		super(text);
 		
 	}

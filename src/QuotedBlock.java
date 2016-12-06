@@ -1,9 +1,27 @@
+import java.util.ArrayList;
 
 public class QuotedBlock extends Node{
 
-	public QuotedBlock(String text) {
+	public QuotedBlock(ArrayList<String> text) {
 		super(text);
-		// TODO Auto-generated constructor stub
+		MDParser parser = new MDParser();
+		parser.FirstTextParser(this.text, this.elements);
+		type = 2;
 	}
-
+	public void accept(MDElementVisitor v)
+	{
+		startIndex = Document.HtmlStr.length();
+		/*if(startIndex != 0)
+			startIndex += -1;
+			*/
+		if(this.elements != null)
+		{
+			System.out.println("Node");
+			for(MDElement element : this.elements)
+			{
+				element.accept(v);
+			}
+			v.visit(this);
+		}
+	}
 }

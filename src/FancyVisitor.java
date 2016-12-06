@@ -26,4 +26,9 @@ public class FancyVisitor implements MDElementVisitor{
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public void visit(QuotedBlock quotedBlock) {
+		// TODO Auto-generated method stub
+		
+	}
 }

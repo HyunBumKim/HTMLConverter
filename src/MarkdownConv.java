@@ -26,9 +26,13 @@ public static void main(String[] args) {
 	Style = CLInterface.Style;
 	
 	MDParser parser;
-	parser = new MDParser(InputFileName);
+	parser = new MDParser();
+	System.out.println(InputFileName);
+	Document document = new Document(InputFileName,parser);
+	System.out.println("1");
 	
-	HtmlGenerator converter = new HtmlGenerator(OutputFileName,parser.document,CLInterface.Style);
+	@SuppressWarnings("unused")
+	HtmlGenerator converter = new HtmlGenerator(OutputFileName,document,CLInterface.Style);
 
 	}catch(Exception e){
 		System.out.println("<this argument null>\n");

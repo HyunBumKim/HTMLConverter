@@ -27,7 +27,7 @@ public class HeaderChecker {
 		String str = text;
 		int i =0;
 		
-		for(i =text.length()-1 ;i >0 ; i--)
+		for(i = text.length()-1 ;i >0 ; i--)
 		{
 			if(text.charAt(i)!=text.charAt(0))
 			{
