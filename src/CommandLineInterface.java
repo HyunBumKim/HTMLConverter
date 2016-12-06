@@ -7,16 +7,8 @@ public class CommandLineInterface {
     public String OutputFileName;
     public String Style;
     
-
 	CommandLineInterface(String[] args)
 	{
-	    
-	    if(args.length == 0 ){
-			System.out.println("Please try again following this form.");
-			System.out.println("java [program name] -md/[InputFile] -html/[OutputFile] -style/[style]");
-			System.exit(1);
-	    }
-		
 	      for(int i=0; i<args.length;i++){
 	          if(args[i].indexOf("-")==0)
 	             args[i]=args[i].replaceFirst("-", "");
@@ -51,7 +43,7 @@ public class CommandLineInterface {
 	                System.out.println("2.  fancy");
 	                System.out.println("3.  slide");
 	                System.exit(0);
-	             default:System.err.println("\nWRONG INPUT : ERROR");
+	             default:System.err.println("WRONG INPUT : ERROR");
 	          }
 	       }
 	       

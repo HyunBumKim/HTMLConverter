@@ -12,23 +12,4 @@ public class FancyVisitor implements MDElementVisitor{
 	{
 		
 	}
-	public void visit(Header header)
-	{
-		
-	}
-
-	public void visit(PlainText plaintext) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void visit(StyleText styletext) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void visit(QuotedBlock quotedBlock) {
-		// TODO Auto-generated method stub
-		
-	}
 }

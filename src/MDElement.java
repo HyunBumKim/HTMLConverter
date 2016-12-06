@@ -1,7 +1,5 @@
 
-
 interface MDElement {
-	
-	abstract public  void accept(MDElementVisitor v);
+	public  void accept(MDElementVisitor v);
 
 }
