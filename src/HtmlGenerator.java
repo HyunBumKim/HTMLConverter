@@ -2,7 +2,7 @@ import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import org.w3c.tidy.Tidy;
+//import org.w3c.tidy.Tidy;
 
 public class HtmlGenerator {
 

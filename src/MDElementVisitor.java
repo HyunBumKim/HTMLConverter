@@ -8,5 +8,8 @@ public interface MDElementVisitor {
 	//...and so on...>>
 	public void visit(Document document);
 	//public void visit(Token token);
+	public void visit(ItemList itemlist);
 	public void visit(Token token);
+	public void visit(Horizonta horizonta);
+	public void visit(CodeBlock codeBlock);
 }

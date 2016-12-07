@@ -1,11 +1,14 @@
 import java.util.ArrayList;
 
 public class PlainText extends Token {
-    String text;
-	public PlainText(String text) {
+	String text;
+	
+    public PlainText(String text) {
 		super(null);
 		this.text = text;
-		this.type = 0;
+		
+		type = 1;
+		
 	}
 
 	public void accept(MDElementVisitor v)

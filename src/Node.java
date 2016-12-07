@@ -13,6 +13,13 @@ public class Node implements MDElement{
 	{	
 		this.text = (ArrayList<String>)text.clone();//수정필요
 		this.elements = new ArrayList<MDElement>();
+		
+		System.out.println("---------------elements----------"+text.size());
+		int i =0;
+		for(i=0;i<text.size();i++)
+			System.out.println("elements"+i+"번째"+text.get(i));
+		System.out.println("------------------------------------"+text.size());
+		
 		(new MDParser()).FirstTextParser(this.text,this.elements);
 	}
 	public Node()
