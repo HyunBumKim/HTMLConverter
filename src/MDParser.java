@@ -205,7 +205,7 @@ public class MDParser {
 	      }
 	     
 	      //////////////////////////////List////////////////////////////////////////////////////////
-	      if(line.matches("^(\\+|-|\\*)(\\s|\\r\\n|\\n|\\r)+[a-z,0-9,A-Z]{1,}(\\s|\\r\\n|\\n|\\r)*"))//unordered list
+	      if(line.matches("^(\\+|-|\\*)(\\s|\\r)+.{1,}(\\s|\\r\\n|\\n|\\r)*"))//unordered list
 	         {
 	            int temp=i+1;
 	            int isordered=0;
@@ -214,20 +214,27 @@ public class MDParser {
 	            buff.clear();         //main string include all bufStr
 	            
 	            buff.add(line.substring(2));
-	            while(next_line.matches("^(\\+|-|\\*)(\\s|\\r\\n|\\n|\\r)+[a-z,0-9,A-Z]{1,}(\\s|\\r\\n|\\n|\\r)*")&& temp<fileContents.size()-1)
+	            while(next_line.matches("^(\\+|-|\\*)(\\s|\\r)+.{1,}(\\s|\\r\\n|\\n|\\r)*")&& temp<fileContents.size()-1)
 	            {
 	               buff.add(next_line.substring(2));
 	               temp++;
 	               next_line = fileContents.get(temp);
 	            }
 	            i=temp-1;
+	            if(next_line.matches("^(\\+|-|\\*)(\\s|\\r)+.{1,}(\\s|\\r\\n|\\n|\\r)*"))
+	            {
+	            	buff.add(next_line.substring(2));
+	            	i=temp;
+	            }
+	            
 	            for(int j=0;j<buff.size();j++){
 	            	buff.set(j, "<li>"+buff.get(j)+"</li>");
 	    		}
 	            elements.add(new ItemList(buff,isordered));
+	            continue;
 	         }
 	      
-	      	 if(line.matches("^[0-9]\\.(\\s|\\r\\n|n|\\r)+.{1,}(\\s|\\r\\n|\\n|\\r)*"))//ordered list
+	      	 if(line.matches("^[0-9]+\\.(\\s|\\r\\n|n|\\r)+.{1,}(\\s|\\r\\n|\\n|\\r)*"))//ordered list
 	         {
 	            int j,temp=i+1;
 	            int isordered=1;
@@ -242,7 +249,7 @@ public class MDParser {
 	            }
 	            
 	            buff.add(line.substring(j+2));
-	            while(next_line.matches("^[0-9]\\.(\\s|\\r\\n|n|\\r)+.{1,}(\\s|\\r\\n|\\n|\\r)*") && temp<fileContents.size()-1)
+	            while(next_line.matches("^[0-9]+\\.(\\s|\\r\\n|n|\\r)+.{1,}(\\s|\\r\\n|\\n|\\r)*") && temp<fileContents.size()-1)
 	            {
 	               for(j=0;j<next_line.length();j++){
 	            	   if(next_line.charAt(j)=='.'){
@@ -254,10 +261,16 @@ public class MDParser {
 	               next_line = fileContents.get(temp);
 	            }
 	            i=temp-1;
+	            if(next_line.matches("^[0-9]+\\.(\\s|\\r\\n|n|\\r)+.{1,}(\\s|\\r\\n|\\n|\\r)*"))
+	            {
+	            	buff.add(next_line.substring(j+3));
+	            	i=temp;
+	            }
 	            for(int k=0;k<buff.size();k++){
 	            	buff.set(k, "<li>"+buff.get(k)+"</li>");
 	    		}
 	            elements.add(new ItemList(buff,isordered));
+	            continue;
 	         }
 	         //System.out.println(line);
 	         //System.out.println(line.matches("^.{0,}[.{1,}](.{1,}).{0,}&"));
@@ -276,11 +289,12 @@ public class MDParser {
 	               if(line.charAt(index_2)==')')
 	                  break;
 	            }
-	            buff.add(line.substring(0, center_index-index_1));//normal string
+	            //buff.add(line.substring(0, center_index-index_1));//normal string
 	            buff.add(line.substring(center_index-index_1+1,center_index));//reference string
 	            buff.add(line.substring(center_index+2,index_2));//url link string
-	            buff.add(line.substring(index_2+1));//normal string
+	            //buff.add(line.substring(index_2+1));//normal string
 	            elements.add(new Link(buff));
+	            continue;
 	         }
 	         
 	      //if(line.matches("^\\s*!\\[+]"))
