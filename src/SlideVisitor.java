@@ -44,4 +44,9 @@ public class SlideVisitor implements MDElementVisitor{
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public void visit(Link link) {
+		// TODO Auto-generated method stub
+		
+	}
 }

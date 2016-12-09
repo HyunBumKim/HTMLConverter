@@ -20,7 +20,7 @@ public class PlainVisitor implements MDElementVisitor {
 	}
 	public void visit(PlainText plaintext)
 	{
-
+		//System.out.println(plaintext.text);
 		Document.HtmlStr +=plaintext.text ;
 	}
 	public void visit(StyleText styletext)
@@ -57,10 +57,17 @@ public class PlainVisitor implements MDElementVisitor {
 	
 	public void visit(ItemList itemlist){
 		if(itemlist.IsOrdered==1){
-			Document.HtmlStr = "<ol>\n"+Document.HtmlStr.substring(0,itemlist.startIndex)+"</ol>\n";
+			
+			Document.HtmlStr = Document.HtmlStr.substring(0,itemlist.startIndex)+"<ol>\n"+Document.HtmlStr.substring(itemlist.startIndex)+"</ol>\n";
 		}
 		else
-			Document.HtmlStr = "<ul>\n"+Document.HtmlStr.substring(0,itemlist.startIndex)+"</ul>\n";
+			Document.HtmlStr = Document.HtmlStr.substring(0,itemlist.startIndex)+"<ul>\n"+Document.HtmlStr.substring(itemlist.startIndex)+"</ul>\n";
+		
+	}
+	public void visit(Link link){
+		System.out.println(Document.HtmlStr);
+		System.out.println(link.text);
+		Document.HtmlStr = Document.HtmlStr.substring(0,link.startIndex)+Document.HtmlStr.substring(link.startIndex);
 		
 	}
 	
