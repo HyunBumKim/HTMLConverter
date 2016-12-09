@@ -19,18 +19,17 @@ public class Document implements MDElement {
 		try{
 	          BufferedReader in = new BufferedReader(new FileReader(InputFileName));
 	          String s;
-	          System.out.println("5");
+
 	          int i =0;
 	          
 	          while((s = in.readLine()) != null){
-	              if(i != 0)
 	            	  fileContents.add(s+"\n");
 	              i++;
-	             System.out.println(s);
+	             
 	          }
 	        
 	          in.close();
-	          System.out.println("5");
+
 	          parser.FirstTextParser(fileContents,Document.elements);
 	          
 	        
@@ -56,11 +55,8 @@ public class Document implements MDElement {
 	public void accept(MDElementVisitor v)
 	{
 		int i =0;
-		System.out.println("Document");
 		for(MDElement element : Document.elements)
 		{ 
-			
-			System.out.println("element num = "+i);
 			element.accept(v);
 			i++;
 		}

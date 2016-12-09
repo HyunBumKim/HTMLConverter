@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Converter" default="javadoc" basedir="." xmlns:jacoco="antlib:org.jacoco.ant">
+
+<description>
+    A build file for this project
+</description>
+
+<!-- properties for this build file-->
+<property name="src.dir" value="${basedir}/src" />
+<property name="class.dir" value="${basedir}/class" />
+<property name="lib.dir" value="${basedir}/lib"/>
+<property name="jar.dir" value="${basedir}/jar" />
+<property name="javadoc.dir" value="${basedir}/doc" />
+<property name="main.class" value="MarkdownConv"/>
+
+<!--setup the directiory to include Jtidy JAR in ${lib.dir}-->
+
+<path id="build-classpath">
+   <fileset dir="${lib.dir}" includes="**/*.jar" />
+</path>
+   
+<taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+   <classpath path="lib/jacocoant.jar"/>
+</taskdef>
+
+<!--initializes some directories for this project-->
+<target name="init" description = "setup directories">
+    <mkdir dir="${class.dir}"/>
+          <mkdir dir="${jar.dir}"/>
+    <mkdir dir="${javadoc.dir}"/>
+</target>
+
+<!-- removes the temporary directiories used and Emacs backup (*~) files-->
+<target name="clean" depends="init" description ="clean the workspace" >
+   <delete dir="${class.dir}"/>
+   <delete dir="${javadoc.dir}"/>
+
+   <delete>
+         <fileset defaultexcludes= "no" dir="${src.dir}" includes="**/*~"/>
+   </delete>
+</target>
+
+<!--compiles the source code in ${src.dir} into ${class.dir}-->
+<target name="compile" depends= "init" description = "compile java sources" >
+        <javac srcdir="${src.dir}" destdir="${class.dir}" classpathref="build-classpath" includeantruntime="false">
+           <classpath path="lib/junit.jar" />
+           <classpath path="lib/hamcrest-core.jar" />
+        </javac>
+</target>
+
+<!--creates a manifest-->
+<target name="create_manifest" depends= "compile">
+   <manifest file = "${src.dir}/MANIFEST.MF">
+   <attribute name = "Built-By" value = "${user.name}"/>
+   <attribute name = "Main-Class" value = "${main.class}"/>
+          <attribute name = "Class-Path" value = "${jar.classpath}"/>
+</manifest>
+</target>
+
+<!--creates the JAR file into ${jar.dir}-->
+<target name="jar" depends="create_manifest">
+      <manifestclasspath property="jar.classpath" jarfile="${lib.dir}/jtidy-r938.jar">
+          <classpath refid="build-classpath"/>
+        </manifestclasspath>
+<jar jarfile="${jar.dir}/MarkdownConv.jar" 
+           basedir="${class.dir}" 
+           includes="**/*.class"
+           manifest = "${src.dir}/MANIFEST.MF"
+    />
+</target>
+
+<!-- generates javadocs into ${javadoc.dir}-->
+<target name="javadoc" depends="compile, jar" description = "generate doc">
+   <javadoc
+         sourcepath="${src.dir}"
+         sourcefiles="${src.dir}/MarkdownConv.java"
+         windowtitle="HelloAnt API"
+         destdir="${javadoc.dir}"
+         classpathref="build-classpath"
+   />
+</target>
+
+<!-- runs the program using the JAR file-->
+<target name="run" depends="compile" description = "running the program">
+   <junit showoutput="true" printsummary="on" enabletestlistenerevents="true" fork="true">
+      <classpath path="${class.dir}" />
+      <classpath path="lib/junit.jar" />
+      <classpath path="lib/hamcrest-core.jar" />
+
+      <formatter type="plain" usefile="false" />
+      <test name="ConvTest">
+      </test>
+   </junit>
+</target>
+   
+<target name="cov-test" depends ="compile">
+   <jacoco:coverage>
+         <junit showoutput="true" printsummary="on" enabletestlistenerevents="true" fork="true">
+            <classpath path="${class.dir}" />
+            <classpath path="lib/junit.jar" />
+            <classpath path="lib/hamcrest-core.jar" />
+
+            <formatter type="plain" usefile="false" />
+
+            <test name="ConvTest">
+            </test>
+         </junit>
+   </jacoco:coverage>
+
+   <jacoco:coverage>
+         <java classname="ConvTest" fork="true">
+            <classpath path="${class.dir}" />
+            <classpath path="lib/junit.jar" />
+            <classpath path="lib/hamcrest-core.jar" />
+         </java>
+   </jacoco:coverage>
+</target>
+   
+<target name="cov-report" depends="cov-test">
+   <jacoco:report>
+         <executiondata>
+            <file file="jacoco.exec" />
+         </executiondata>
+
+         <structure name="Converter">
+            <classfiles>
+            <fileset dir="${class.dir}" />
+            </classfiles>
+            <sourcefiles>
+               <fileset dir="${src.dir}" />
+            </sourcefiles>
+         </structure>
+
+         <html destdir="report" />
+   </jacoco:report>
+
+</target>   
+   
+</project>
