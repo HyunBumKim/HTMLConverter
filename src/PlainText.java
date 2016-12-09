@@ -6,9 +6,7 @@ public class PlainText extends Token {
     public PlainText(String text) {
 		super(null);
 		this.text = text;
-		
 		type = 1;
-		
 	}
 
 	public void accept(MDElementVisitor v)

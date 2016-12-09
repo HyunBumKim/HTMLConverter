@@ -6,11 +6,7 @@ public class Header extends Node {
 	
 	public Header(ArrayList<String> text,int headerLevel) {
 		super(text);
-		level = headerLevel;
-		//MDParser parser = new MDParser();
-		//parser.FirstTextParser(this.text, this.elements);
-		//this.type =1;
-		
+		level = headerLevel;		
 	}
 	public void accept(MDElementVisitor v)
 	{

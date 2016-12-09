@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class PlainVisitor implements MDElementVisitor {
 	
@@ -5,8 +6,8 @@ public class PlainVisitor implements MDElementVisitor {
 	{
 		if(header.level == 0)
 		{
-			Document.HtmlStr = Document.HtmlStr.substring(0,header.startIndex) +"<header>\n"
-					+ Document.HtmlStr.substring(header.startIndex)+"</header>"+"\n";
+			Document.HtmlStr = Document.HtmlStr.substring(0,header.startIndex) +"<head>\n"
+					+ Document.HtmlStr.substring(header.startIndex)+"</head>"+"\n";
 		}
 		else 
 		{
@@ -15,18 +16,29 @@ public class PlainVisitor implements MDElementVisitor {
 			Document.HtmlStr = Document.HtmlStr.substring(0,header.startIndex) + head+"\n"
 					+ Document.HtmlStr.substring(header.startIndex)+end+"\n";
 		}
-	
-			
 	}
 	public void visit(PlainText plaintext)
 	{
-		//System.out.println(plaintext.text);
-		Document.HtmlStr +=plaintext.text ;
+		Document.HtmlStr += plaintext.text ;
 	}
 	public void visit(StyleText styletext)
-	{
-		
-	}
+	   {
+	      if(styletext.type==5)
+	      {
+	            Document.HtmlStr= Document.HtmlStr.substring(0, styletext.startIndex) + "<em>"
+	                  + Document.HtmlStr.substring(styletext.startIndex) + "</em>";
+	      }
+	      else if(styletext.type==6)
+	      {
+	            Document.HtmlStr= Document.HtmlStr.substring(0, styletext.startIndex) + "<strong>"
+	                  + Document.HtmlStr.substring(styletext.startIndex) + "</strong>";
+	      }
+	      else if(styletext.type==7)
+	      {
+	         Document.HtmlStr= Document.HtmlStr.substring(0, styletext.startIndex) + "<em><strong>"
+	                  + Document.HtmlStr.substring(styletext.startIndex) + "</strong></em>";
+	      }
+	   }
 	public void visit(Document document)
 	{
 
@@ -54,19 +66,21 @@ public class PlainVisitor implements MDElementVisitor {
 				+ codeBlock.contents+"</pre></code>\n";
 		
 	}
-	
 	public void visit(ItemList itemlist){
 		if(itemlist.IsOrdered==1){
-			
+	         
 			Document.HtmlStr = Document.HtmlStr.substring(0,itemlist.startIndex)+"<ol>\n"+Document.HtmlStr.substring(itemlist.startIndex)+"</ol>\n";
-		}
-		else
-			Document.HtmlStr = Document.HtmlStr.substring(0,itemlist.startIndex)+"<ul>\n"+Document.HtmlStr.substring(itemlist.startIndex)+"</ul>\n";
+	    }
+	    else
+	        Document.HtmlStr = Document.HtmlStr.substring(0,itemlist.startIndex)+"<ul>\n"+Document.HtmlStr.substring(itemlist.startIndex)+"</ul>\n";
+	}
+	@Override
+	public void visit(Link link) {
+		//Document.HtmlStr = 
 		
 	}
-	public void visit(Link link){
-		
-		Document.HtmlStr = Document.HtmlStr.substring(0,link.startIndex)+Document.HtmlStr.substring(link.startIndex);
+	@Override
+	public void visit(Image image) {
+		Document.HtmlStr = Document.HtmlStr.substring(0,image.startIndex)+image.linkElements;
 	}
-	
 }

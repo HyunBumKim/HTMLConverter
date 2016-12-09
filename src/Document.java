@@ -5,17 +5,16 @@ import java.util.ArrayList;
 
 public class Document implements MDElement {
 	static ArrayList<MDElement> elements;
-	static String HtmlStr; 
-    ArrayList<String> fileContents;
+	static String HtmlStr;
+	ArrayList<String> fileContents;
 	
 	@SuppressWarnings("unchecked")
 	Document(String InputFileName,MDParser parser)
 	{
 		
-		HtmlStr = new String();
+		HtmlStr = new String("<!DOCTYPE html PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html>\n");
 		fileContents = new ArrayList<String>();
 		Document.elements = new ArrayList<MDElement>();
-		
 		try{
 	          BufferedReader in = new BufferedReader(new FileReader(InputFileName));
 	          String s;
@@ -25,15 +24,12 @@ public class Document implements MDElement {
 	          while((s = in.readLine()) != null){
 	            	  fileContents.add(s+"\n");
 	              i++;
-	             
 	          }
 	        
 	          in.close();
 
 	          parser.FirstTextParser(fileContents,Document.elements);
-	          
-	        
-	          
+
 	       }
 	       catch(IOException e){
 	          System.err.println(e);
@@ -61,7 +57,6 @@ public class Document implements MDElement {
 			i++;
 		}
 		v.visit(this);
-		
 	}
 	
 	
