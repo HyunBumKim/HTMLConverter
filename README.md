@@ -26,7 +26,7 @@ HTMLConverter
 4.	HELP Option : when help command is input, it will explain about command
 
 
-		java HTMLConverter -help
+		java -jar MarkdownConv.jar -help
 
 		-md/fileName.md fileName: the name of md file which will be converted into html
 
