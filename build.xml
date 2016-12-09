@@ -10,6 +10,7 @@
 <property name="src.dir" value="${basedir}/src" />
 <property name="class.dir" value="${basedir}/class" />
 <property name="lib.dir" value="${basedir}/lib"/>
+<property name="jar.dir" value="${basedir}" />
 <property name="javadoc.dir" value="${basedir}/doc" />
 <property name="main.class" value="MarkdownConv"/>
 
@@ -26,6 +27,7 @@
 <!--initializes some directories for this project-->
 <target name="init" description = "setup directories">
     <mkdir dir="${class.dir}"/>
+          <mkdir dir="${jar.dir}"/>
     <mkdir dir="${javadoc.dir}"/>
 </target>
 
@@ -56,12 +58,12 @@
 </manifest>
 </target>
 
-<!--creates the JAR file into basedir-->
+<!--creates the JAR file into ${jar.dir}-->
 <target name="jar" depends="create_manifest">
       <manifestclasspath property="jar.classpath" jarfile="${lib.dir}/jtidy-r938.jar">
           <classpath refid="build-classpath"/>
         </manifestclasspath>
-<jar jarfile="${basedir}/MarkdownConv.jar" 
+<jar jarfile="${jar.dir}/MarkdownConv.jar" 
            basedir="${class.dir}" 
            includes="**/*.class"
            manifest = "${src.dir}/MANIFEST.MF"
