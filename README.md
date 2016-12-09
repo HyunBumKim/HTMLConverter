@@ -13,9 +13,9 @@ HTMLConverter
 
 2.	Check path and execute ant (jar directory is deleted because of path of readable markdown file )
 
-	```
+
 	    ant
-	```
+
 
 3.	Input the input value by command line
 
@@ -35,10 +35,12 @@ HTMLConverter
 
 	WRONG INPUT : ERROR
 
-**How to test coverage** 1. After execution for ant, execute “ant cov-test” > ant
-
+**How to test coverage** 
+1. After execution for ant, execute “ant cov-test”
+> ant
 > ant cov-test
 
-1.	Check whether it is success or fail, execute “ant cov-report” > ant cov-report
+1.	Check whether it is success or fail, execute “ant cov-report” 
+> ant cov-report
 
 2.	Find report directory and watch index.html to check coverage
