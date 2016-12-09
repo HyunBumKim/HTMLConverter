@@ -36,11 +36,13 @@ HTMLConverter
 	WRONG INPUT : ERROR
 
 **How to test coverage** 
-1. After execution for ant, execute “ant cov-test”
+1.  After execution for ant, execute “ant cov-test”
+
 > ant
 > ant cov-test
 
-1.	Check whether it is success or fail, execute “ant cov-report” 
+2. Check whether it is success or fail, execute “ant cov-report” 
+
 > ant cov-report
 
-2.	Find report directory and watch index.html to check coverage
+3.	Find report directory and watch index.html to check coverage
