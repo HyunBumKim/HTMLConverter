@@ -12,14 +12,14 @@ public class Document implements MDElement {
 	Document(String InputFileName,MDParser parser)
 	{
 		
-		HtmlStr = new String();
+		HtmlStr = new String("<!DOCTYPE html PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html>\n");
 		fileContents = new ArrayList<String>();
 		Document.elements = new ArrayList<MDElement>();
 		
 		try{
 	          BufferedReader in = new BufferedReader(new FileReader(InputFileName));
 	          String s;
-	          //System.out.println("5");
+
 	          int i =0;
 	          
 	          while((s = in.readLine()) != null){
@@ -29,11 +29,10 @@ public class Document implements MDElement {
 	          }
 	        
 	          in.close();
-	          int j =0;
-	          for(j =0;j<fileContents.size();j++)
-	              System.out.println(j+"¹ø¤Š#######"+fileContents.get(j));
+
 	          parser.FirstTextParser(fileContents,Document.elements);
-	          
+	         
+
 	        
 	          
 	       }
@@ -49,19 +48,11 @@ public class Document implements MDElement {
 	
 	}
 	
-	public void updateElements()
-	{
-		
-	}
-	
 	public void accept(MDElementVisitor v)
 	{
 		int i =0;
-		System.out.println("Document");
 		for(MDElement element : Document.elements)
 		{ 
-			
-			System.out.println("element num = "+i);
 			element.accept(v);
 			i++;
 		}

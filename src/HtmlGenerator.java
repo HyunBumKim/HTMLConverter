@@ -9,8 +9,8 @@ public class HtmlGenerator {
 	HtmlGenerator(String outputFileName, Document document,String style)
 	{
 		String s;
-		//try {
-		     // BufferedWriter out = new BufferedWriter(new FileWriter(outputFileName));
+		try {
+		      
 			
 			
 		      MDElementVisitor visitor = null;
@@ -30,32 +30,35 @@ public class HtmlGenerator {
 		      }
 		      
 		      document.accept(visitor);
-
-		      System.out.println("=========html============");
+		      Document.HtmlStr += "</html>";
+		      
+		      System.out.println("===============================html============================");
 		      System.out.print(Document.HtmlStr);
 		      
-		      //out.write(document.elements.get(0).text); out.newLine();
-		      //out.write(s); out.newLine();
-		//	  BufferedWriter out = new BufferedWriter(new FileWriter("test.html"));
-		//	  s="<html><p>My cat is very grumpy</p></html>";
-			//  out.write(Document.HtmlStr); 
-			/*  
+		      BufferedWriter out = new BufferedWriter(new FileWriter(outputFileName));
+		      
+		      out.write(Document.HtmlStr);
+		      out.close();
+		      
 			  FileInputStream file = new FileInputStream(outputFileName);
 			  Tidy tidy = new Tidy();
+			  
+			  System.out.println("==================Jtidy checking HTML Syntax===================");
 			  tidy.parse(file, System.out);
 			  
 			  if(tidy.getParseErrors() == 0)
 					 System.out.println("Valid html Syntax!");
 			  else
 					System.out.println("Invalid html Syntax!");	
-			  //file.close();
-		      out.close();
-		      */
+			  
+			  file.close();
+			  
+		    
 		      ////////////////////////////////////////////////////////////////
-		  /*  } catch (IOException e) {
+		    } catch (IOException e) {
 		        System.err.println(e); // 에러가 있다면 메시지 출력
 		        System.exit(1);
-		    }*/
+		    }
 	}
 	
 	

@@ -11,10 +11,6 @@ public class PlainText extends Token {
 		
 	}
 
-
-   
-	
-	
 	public void accept(MDElementVisitor v)
 	{
 		startIndex = Document.HtmlStr.length();

@@ -8,12 +8,9 @@ public class QuotedBlock extends Node{
 	public void accept(MDElementVisitor v)
 	{
 		startIndex = Document.HtmlStr.length();
-		/*if(startIndex != 0)
-			startIndex += -1;
-			*/
+
 		if(this.elements != null)
 		{
-			System.out.println("Node");
 			for(MDElement element : this.elements)
 			{
 				element.accept(v);

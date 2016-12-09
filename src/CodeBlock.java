@@ -1,10 +1,16 @@
-import java.util.ArrayList;
 
 public class CodeBlock extends Node{
-
-	public CodeBlock(ArrayList<String> text) {
-		super(text);
-		// TODO Auto-generated constructor stub
+	public String contents;
+	public CodeBlock(String contents) {
+		super(null);
+		this.contents = new String();
+		this.contents = contents; 
+		
 	}
-
+	public void accept(MDElementVisitor v)
+	{
+		startIndex = Document.HtmlStr.length();
+		v.visit(this);
+		
+	}
 }
