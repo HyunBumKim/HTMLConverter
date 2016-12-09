@@ -10,7 +10,7 @@
 <property name="src.dir" value="${basedir}/src" />
 <property name="class.dir" value="${basedir}/class" />
 <property name="lib.dir" value="${basedir}/lib"/>
-<property name="jar.dir" value="${basedir}/jar" />
+<property name="jar.dir" value="${basedir}" />
 <property name="javadoc.dir" value="${basedir}/doc" />
 <property name="main.class" value="MarkdownConv"/>
 
