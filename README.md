@@ -19,9 +19,12 @@ HTMLConverter
 
 3.	Input the input value by command line
 
+
 	java -jar MarkdownConv.jar -md/test.md -html/test.html -style/plain
+	
 
 4.	HELP Option : when help command is input, it will explain about command
+
 
 	java HTMLConverter -help
 
@@ -30,10 +33,13 @@ HTMLConverter
 	-html/fileName.html fileName: the name of html file which will be created from md file
 
 	-style/styleName styleName : there are three types 1. plain 2. fancy 3. slide
+	
 
 5.	If users inputs wrong input, error message will be printed
 
+
 	WRONG INPUT : ERROR
+	
 
 **How to test coverage** 
 
