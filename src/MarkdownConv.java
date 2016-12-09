@@ -19,26 +19,26 @@ public static void main(String[] args) {
 		InputFileName = new String();								
 	    OutputFileName = new String();
 	
-	CommandLineInterface CLInterface = new CommandLineInterface(argsCpy);
+		CommandLineInterface CLInterface = new CommandLineInterface(argsCpy);
+		
+		InputFileName = CLInterface.InputFileName;
+		OutputFileName = CLInterface.OutputFileName;
+		Style = CLInterface.Style;
+		
+		MDParser parser;
+		parser = new MDParser();
+		System.out.println(InputFileName);
+		Document document = new Document(InputFileName,parser);
+		System.out.println("1");
+		
+		@SuppressWarnings("unused")
+		HtmlGenerator converter = new HtmlGenerator(OutputFileName,document,CLInterface.Style);
 	
-	InputFileName = CLInterface.InputFileName;
-	OutputFileName = CLInterface.OutputFileName;
-	Style = CLInterface.Style;
-	
-	MDParser parser;
-	parser = new MDParser();
-	System.out.println(InputFileName);
-	Document document = new Document(InputFileName,parser);
-	System.out.println("1");
-	
-	@SuppressWarnings("unused")
-	HtmlGenerator converter = new HtmlGenerator(OutputFileName,document,CLInterface.Style);
-
-	}catch(Exception e){
+	}
+	catch(Exception e){
 		System.out.println("<this argument null>\n");
 		System.out.println(e);
 	}
-	
- }
+}
 }
 

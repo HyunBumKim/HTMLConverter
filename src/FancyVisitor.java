@@ -31,4 +31,24 @@ public class FancyVisitor implements MDElementVisitor{
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public void visit(Horizonta horizonta) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void visit(CodeBlock codeBlock) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void visit(ItemList itemlist) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void visit(Link link) {
+		// TODO Auto-generated method stub
+		
+	}
 }
