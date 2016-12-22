@@ -9,47 +9,38 @@ HTMLConverter
 
 ***How to run***
 
-1.	Users perform this program through cmd and Check build.xml for building html converter
+-	Users perform this program through cmd and Check build.xml for building html converter
 
-2.	Check path and execute ant (jar directory is deleted because of path of readable markdown file )
+-	Check path and execute ant (jar directory is deleted because of path of readable markdown file )
 
+	ant
 
-	    ant
+-	Input the input value by command line
 
+	java -jar MarkdownConv.jar -md/test.md -html/test.html -style/plain
 
-3.	Input the input value by command line
+-	HELP Option : when help command is input, it will explain about command
 
+	java -jar MarkdownConv.jar -help
 
-		java -jar MarkdownConv.jar -md/test.md -html/test.html -style/plain
-	
+	-md/fileName.md fileName: the name of md file which will be converted into html
 
-4.	HELP Option : when help command is input, it will explain about command
+	-html/fileName.html fileName: the name of html file which will be created from md file
 
+	-style/styleName styleName : there are three types 1. plain 2. fancy 3. slide
 
-		java -jar MarkdownConv.jar -help
+-	If users inputs wrong input, error message will be printed
 
-		-md/fileName.md fileName: the name of md file which will be converted into html
+	WRONG INPUT : ERROR
 
-		-html/fileName.html fileName: the name of html file which will be created from md file
+**How to test coverage**
 
-		-style/styleName styleName : there are three types 1. plain 2. fancy 3. slide
-	
+-	After execution for ant, execute “ant cov-test”
 
-5.	If users inputs wrong input, error message will be printed
+> ant ant cov-test
 
-
-		WRONG INPUT : ERROR
-	
-
-**How to test coverage** 
-
-1.  After execution for ant, execute “ant cov-test”
-
-> ant
-> ant cov-test
-
-2. Check whether it is success or fail, execute “ant cov-report” 
+-	Check whether it is success or fail, execute “ant cov-report”
 
 > ant cov-report
 
-3.	Find report directory and watch index.html to check coverage
+-	Find report directory and watch index.html to check coverage
