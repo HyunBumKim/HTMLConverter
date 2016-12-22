@@ -137,8 +137,10 @@ public class MDParser {
 	    			  buff.clear();
 	    			  buff.add(line);
 	    			  i++; // next line is identified.
-	    			  Header header = new Header(buff,0); // this header doesn't have header level. 
-	    			  elements.add(header);
+				if(downline.matches("^\\s*=+=+=+(\\s|\r\n|\n|\r)*$"))
+	    			  elements.add(new Header(buff,1)); // this header doesn't have header level. 
+				else
+					elements.add(new Header(buff,2));
 	    			  continue;
 	    		  }
 	    	  }

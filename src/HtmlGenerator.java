@@ -21,10 +21,7 @@ public class HtmlGenerator {
 		      case "fancy":
 		    	  visitor = new FancyVisitor();
 		    	  break;
-		      case "slide":
-		    	  visitor = new SlideVisitor();
-		    	  break;
-		      }
+	     	    }
 		      
 		      document.accept(visitor);
 

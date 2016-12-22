@@ -4,18 +4,11 @@ public class PlainVisitor implements MDElementVisitor {
 	
 	public void visit(Header header)
 	{
-		if(header.level == 0)
-		{
-			Document.HtmlStr = Document.HtmlStr.substring(0,header.startIndex) +"<head>\n"
-					+ Document.HtmlStr.substring(header.startIndex)+"</head>"+"\n";
-		}
-		else 
-		{
 			String head = "<h"+ Integer.toString(header.level)+">";
 			String end = "</h"+ Integer.toString(header.level)+">";
 			Document.HtmlStr = Document.HtmlStr.substring(0,header.startIndex) + head+"\n"
 					+ Document.HtmlStr.substring(header.startIndex)+end+"\n";
-		}
+		
 	}
 	public void visit(PlainText plaintext)
 	{
@@ -58,7 +51,7 @@ public class PlainVisitor implements MDElementVisitor {
 	}
 	public void visit(Horizonta horizonta)
 	{
-		Document.HtmlStr = Document.HtmlStr.substring(0,horizonta.startIndex)+"\n<hr />\n";
+		Document.HtmlStr = Document.HtmlStr.substring(0,horizonta.startIndex)+"\n<hr>\n";
 	}
 	@Override
 	public void visit(CodeBlock codeBlock) {
@@ -76,7 +69,7 @@ public class PlainVisitor implements MDElementVisitor {
 	}
 	@Override
 	public void visit(Link link) {
-		//Document.HtmlStr = 
+		Document.HtmlStr = Document.HtmlStr.substring(0,link.startIndex)+Document.HtmlStr.substring(link.startIndex);
 		
 	}
 	@Override
